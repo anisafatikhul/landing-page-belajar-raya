@@ -63,9 +63,9 @@
         .font-serif { font-family: 'Lora', Georgia, serif; }
 
         /* Headline typography per SK Brand Guide: 114% line-height, -1% letter-spacing
-           H1 uses 140% — looser feel for the large serif hero display. */
+           H1 uses 160% for airy hero display. */
         h2, h3, h4 { line-height: 1.14; letter-spacing: -0.01em; }
-        h1 { line-height: 1.4; letter-spacing: -0.01em; }
+        h1 { line-height: 1.6; letter-spacing: -0.01em; }
 
         /* Hero gradient — brand Sunglow + May Green */
         .hero-bg {
@@ -102,18 +102,24 @@
 <body class="bg-white">
 
     <!-- ============================================ -->
-    <!-- [1] HERO                                      -->
+    <!-- Sticky top nav                                -->
     <!-- ============================================ -->
-    <header class="hero-bg">
-        <div class="max-w-container mx-auto px-6 md:px-8 pt-8 pb-16 md:pt-10 md:pb-24">
-
-            <!-- Top nav -->
-            <nav class="flex items-center justify-between mb-12 md:mb-16">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-100">
+        <div class="max-w-container mx-auto px-6 md:px-8">
+            <nav class="flex items-center justify-between py-3 md:py-4">
                 <a href="#" aria-label="Sakola Kembara — ke atas" class="flex items-center">
                     <img src="assets/logo-sakola-kembara.png" alt="Sakola Kembara" class="h-9 md:h-10 w-auto" width="300" height="103" />
                 </a>
                 <a href="#donasi" class="btn bg-catalina text-white hover:bg-space-cadet text-sm">Donasi Sekarang</a>
             </nav>
+        </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- [1] HERO                                      -->
+    <!-- ============================================ -->
+    <section class="hero-bg">
+        <div class="max-w-container mx-auto px-6 md:px-8 pt-12 pb-16 md:pt-16 md:pb-24">
 
             <div class="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
 
@@ -150,7 +156,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- ============================================ -->
     <!-- [2] STORY                                     -->
