@@ -132,19 +132,19 @@
                     </div>
                 </div>
 
-                <!-- Right: video placeholder -->
+                <!-- Right: video -->
                 <div>
-                    <!-- VIDEO_PLACEHOLDER -->
-                    <!-- Replace with YouTube embed or video file. Example:
-                         <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/VIDEO_ID" title="Video Sakola Kembara"
-                           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    -->
-                    <div class="aspect-video w-full rounded-xl border-2 border-dashed border-catalina/30 bg-white/60 backdrop-blur flex flex-col items-center justify-center text-center p-6 shadow-card">
-                        <div class="play-pulse w-16 h-16 rounded-full bg-may-green text-white flex items-center justify-center mb-3 shadow-card-lg" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <p class="font-semibold text-catalina">Video Sakola Kembara</p>
-                        <p class="text-sm text-text-muted mt-1">Video akan segera hadir</p>
+                    <!-- Video: https://www.youtube.com/watch?v=1EH82AXGKZI -->
+                    <div class="aspect-video w-full rounded-xl overflow-hidden shadow-card-lg bg-catalina">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/1EH82AXGKZI?rel=0"
+                            title="Video Sakola Kembara"
+                            loading="lazy"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
