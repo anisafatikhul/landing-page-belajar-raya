@@ -62,8 +62,11 @@
         body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; line-height: 1.55; letter-spacing: 0.003em; }
         .font-serif { font-family: 'Lora', Georgia, serif; }
 
-        /* Headline typography per SK Brand Guide: 114% line-height, -1% letter-spacing */
-        h1, h2, h3, h4 { line-height: 1.14; letter-spacing: -0.01em; }
+        /* Headline typography per SK Brand Guide: 114% line-height, -1% letter-spacing
+           H1 is bumped slightly to 1.2 — the 1.14 guide value is tight for very
+           large Lora serif display sizes. */
+        h2, h3, h4 { line-height: 1.14; letter-spacing: -0.01em; }
+        h1 { line-height: 1.2; letter-spacing: -0.01em; }
 
         /* Hero gradient — brand Sunglow + May Green */
         .hero-bg {
