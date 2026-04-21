@@ -67,6 +67,19 @@
         h2, h3, h4 { line-height: 1.14; letter-spacing: -0.01em; }
         h1 { line-height: 1.6; letter-spacing: -0.01em; }
 
+        /* Sticky nav — transparent at top, white on scroll */
+        .site-nav {
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: background-color .2s ease, border-color .2s ease, backdrop-filter .2s ease;
+        }
+        .site-nav.is-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom-color: rgb(243, 244, 246);
+        }
+
         /* Hero gradient — brand Sunglow + May Green */
         .hero-bg {
             background:
@@ -102,9 +115,9 @@
 <body class="bg-white">
 
     <!-- ============================================ -->
-    <!-- Sticky top nav                                -->
+    <!-- Sticky top nav (transparent at top, white on scroll) -->
     <!-- ============================================ -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-100">
+    <header id="site-nav" class="sticky top-0 z-40 site-nav">
         <div class="max-w-container mx-auto px-6 md:px-8">
             <nav class="flex items-center justify-between py-3 md:py-4">
                 <a href="#" aria-label="Sakola Kembara — ke atas" class="flex items-center">
@@ -445,6 +458,22 @@
     <div id="toast" class="toast" role="status" aria-live="polite">Nomor rekening disalin</div>
 
     <script>
+        // Toggle white bg on sticky nav after user scrolls past the top
+        (function () {
+            const nav = document.getElementById('site-nav');
+            if (!nav) return;
+            const threshold = 8;
+            const onScroll = () => {
+                if (window.scrollY > threshold) {
+                    nav.classList.add('is-scrolled');
+                } else {
+                    nav.classList.remove('is-scrolled');
+                }
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
         function copyAccountNumber() {
             const el = document.getElementById('account-number');
             const text = el.textContent.replace(/[-\s]/g, '');
