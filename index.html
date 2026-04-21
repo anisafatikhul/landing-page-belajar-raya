@@ -74,6 +74,8 @@
         }
 
         /* Sticky nav — transparent at top, white on scroll */
+        :root { --nav-h: 60px; }
+        @media (min-width: 768px) { :root { --nav-h: 72px; } }
         .site-nav {
             background: transparent;
             border-bottom: 1px solid transparent;
@@ -85,6 +87,41 @@
             -webkit-backdrop-filter: blur(8px);
             border-bottom-color: rgb(243, 244, 246);
         }
+
+        /* Pull hero gradient up behind the sticky nav for seamless blend */
+        .hero-bleed {
+            margin-top: calc(var(--nav-h) * -1);
+            padding-top: var(--nav-h);
+        }
+
+        /* Back-to-top floating button (mobile only) */
+        .btt-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background: #122E76;
+            color: #FFFFFF;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity .2s ease, transform .2s ease;
+            z-index: 45;
+            cursor: pointer;
+        }
+        .btt-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        @media (min-width: 768px) { .btt-btn { display: none; } }
 
         /* Hero gradient — brand Sunglow + May Green */
         .hero-bg {
@@ -121,25 +158,25 @@
 <body class="bg-white">
 
     <!-- ============================================ -->
-    <!-- Hero wrapper + sticky nav (nav blends with    -->
-    <!-- hero-bg gradient at top; turns white on scroll) -->
+    <!-- Page-sticky nav (transparent at top over hero -->
+    <!-- gradient, frosted white once scrolled) -->
     <!-- ============================================ -->
-    <div class="hero-bg">
+    <header id="site-nav" class="sticky top-0 z-40 site-nav">
+        <div class="max-w-container mx-auto px-6 md:px-8">
+            <nav class="flex items-center justify-between py-3 md:py-4">
+                <a href="#" aria-label="Sakola Kembara — ke atas" class="flex items-center">
+                    <img src="assets/logo-sakola-kembara.png" alt="Sakola Kembara" class="h-9 md:h-10 w-auto" width="300" height="103" />
+                </a>
+                <a href="#donasi" class="btn bg-catalina text-white hover:bg-space-cadet text-sm">Donasi Sekarang</a>
+            </nav>
+        </div>
+    </header>
 
-        <header id="site-nav" class="sticky top-0 z-40 site-nav">
-            <div class="max-w-container mx-auto px-6 md:px-8">
-                <nav class="flex items-center justify-between py-3 md:py-4">
-                    <a href="#" aria-label="Sakola Kembara — ke atas" class="flex items-center">
-                        <img src="assets/logo-sakola-kembara.png" alt="Sakola Kembara" class="h-9 md:h-10 w-auto" width="300" height="103" />
-                    </a>
-                    <a href="#donasi" class="btn bg-catalina text-white hover:bg-space-cadet text-sm">Donasi Sekarang</a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- ============================================ -->
-        <!-- [1] HERO                                      -->
-        <!-- ============================================ -->
+    <!-- ============================================ -->
+    <!-- [1] HERO                                      -->
+    <!-- ============================================ -->
+    <!-- negative margin pulls the gradient up under the sticky nav for blend -->
+    <div class="hero-bg hero-bleed">
         <section>
             <div class="max-w-container mx-auto px-6 md:px-8 pt-6 pb-16 md:pt-8 md:pb-24">
 
@@ -453,24 +490,42 @@
         </div>
     </footer>
 
+    <!-- Back-to-top button (mobile, appears near page bottom) -->
+    <button id="btt-btn" type="button" class="btt-btn" aria-label="Kembali ke atas">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
+
     <!-- Copy toast -->
     <div id="toast" class="toast" role="status" aria-live="polite">Nomor rekening disalin</div>
 
     <script>
-        // Toggle white bg on sticky nav after user scrolls past the top
+        // Sticky nav: toggle white bg after user scrolls past the top
+        // Back-to-top button: appears when user is within 400px of page bottom
         (function () {
             const nav = document.getElementById('site-nav');
-            if (!nav) return;
-            const threshold = 8;
+            const btt = document.getElementById('btt-btn');
+            const navThreshold = 8;
+            const bttThreshold = 400;
+
             const onScroll = () => {
-                if (window.scrollY > threshold) {
-                    nav.classList.add('is-scrolled');
-                } else {
-                    nav.classList.remove('is-scrolled');
+                if (nav) {
+                    nav.classList.toggle('is-scrolled', window.scrollY > navThreshold);
+                }
+                if (btt) {
+                    const distFromBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+                    btt.classList.toggle('is-visible', distFromBottom < bttThreshold);
                 }
             };
+
             window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
             onScroll();
+
+            if (btt) {
+                btt.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         })();
 
         function copyAccountNumber() {
