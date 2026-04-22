@@ -1,2 +1,7 @@
 .claude/
 .DS_Store
+
+# Source photo folders — originals kept locally, optimized copies live in assets/
+assets/PraPembinaan/
+assets/Pembinaan/
+assets/Pasca Pembinaan/
