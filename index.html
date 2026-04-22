@@ -148,6 +148,30 @@
             50% { transform: scale(1.08); opacity: 0.85; }
         }
 
+        /* Program card image marquee — seamless horizontal infinite scroll.
+           Each tile gets a uniform margin-right (including the last) so the
+           duplicated set starts on an identical cadence, making translateX(-50%)
+           land exactly at the loop boundary without a gap-induced jump. */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 80s linear infinite;
+        }
+        .marquee-track > * { margin-right: 8px; }
+        .marquee:hover .marquee-track,
+        .marquee:focus-within .marquee-track { animation-play-state: paused; }
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track { animation: none; }
+        }
+
+        /* Lightbox — full-screen photo preview */
+        .lightbox { display: none; }
+        .lightbox.is-open { display: flex; }
+
     </style>
 </head>
 
@@ -225,7 +249,7 @@
 
                 <!-- Image -->
                 <div class="order-2 md:order-1">
-                    <img src="assets/hero-team.jpg" alt="Tim dan siswa Sakola Kembara" loading="lazy" class="w-full rounded-xl shadow-card-lg object-cover aspect-[4/3]" />
+                    <img src="assets/story-img-2.png" alt="Tim dan siswa Sakola Kembara" loading="lazy" width="1094" height="678" class="w-full rounded-xl shadow-card-lg object-cover aspect-[4/3]" />
                 </div>
 
                 <!-- Copy -->
@@ -276,32 +300,99 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">1</div>
-                    <h3 class="font-semibold text-xl text-catalina mb-2">Prapembinaan</h3>
-                    <p class="text-sm font-medium text-may-green mb-3">Seleksi & Roadshow</p>
-                    <p class="text-text-muted leading-relaxed">
-                        Roadshow ke sekolah-sekolah di daerah untuk menjaring dan menyeleksi siswa berpotensi yang membutuhkan dukungan.
-                    </p>
+                <!-- Card 1: Prapembinaan -->
+                <article class="bg-white rounded-xl shadow-card border border-gray-100 hover:shadow-card-lg transition-shadow overflow-clip flex flex-col min-w-0">
+                    <div class="p-6 md:p-7 flex flex-col gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg shrink-0">1</div>
+                            <h3 class="font-semibold text-xl text-catalina">Prapembinaan</h3>
+                        </div>
+                        <!-- METRIC_1: update once prapembinaan coverage numbers are verified -->
+                        <div class="inline-flex items-center self-start gap-1.5 px-3 py-1 rounded-full bg-may-green/10 text-may-green text-xs font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Multi-kota di Indonesia
+                        </div>
+                        <p class="text-sm font-medium text-may-green">Roadshow & Seleksi</p>
+                        <p class="text-text-muted leading-relaxed">
+                            Menjangkau dan menyeleksi siswa berpotensi dari berbagai daerah melalui roadshow ke sekolah dan seleksi berbasis motivasi.
+                        </p>
+                    </div>
+                    <!-- PROGRAM_IMAGES_1: replace picsum URLs with real prapembinaan photos -->
+                    <div class="marquee relative overflow-hidden pb-6 md:pb-7 mt-2">
+                        <div class="marquee-track">
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-1/1600/1200" data-alt="Roadshow Sakola Kembara"><img src="https://picsum.photos/seed/sk-pre-1/400/400" alt="Roadshow Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-2/1600/1200" data-alt="Seleksi siswa Sakola Kembara"><img src="https://picsum.photos/seed/sk-pre-2/400/400" alt="Seleksi siswa Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-3/1600/1200" data-alt="Sosialisasi prapembinaan"><img src="https://picsum.photos/seed/sk-pre-3/400/400" alt="Sosialisasi prapembinaan" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-4/1600/1200" data-alt="Siswa daerah Sakola Kembara"><img src="https://picsum.photos/seed/sk-pre-4/400/400" alt="Siswa daerah Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <!-- duplicate set for seamless loop -->
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-1/1600/1200" data-alt="Roadshow Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-pre-1/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-2/1600/1200" data-alt="Seleksi siswa Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-pre-2/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-3/1600/1200" data-alt="Sosialisasi prapembinaan" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-pre-3/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-pre-4/1600/1200" data-alt="Siswa daerah Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-pre-4/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                        </div>
+                    </div>
                 </article>
-                <!-- Card 2 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">2</div>
-                    <h3 class="font-semibold text-xl text-catalina mb-2">Pembinaan</h3>
-                    <p class="text-sm font-medium text-may-green mb-3">Pembelajaran Intensif</p>
-                    <p class="text-text-muted leading-relaxed">
-                        Program satu tahun berisi pembelajaran intensif dan mentoring persiapan UTBK untuk menembus PTN impian.
-                    </p>
+                <!-- Card 2: Pembinaan -->
+                <article class="bg-white rounded-xl shadow-card border border-gray-100 hover:shadow-card-lg transition-shadow overflow-clip flex flex-col min-w-0">
+                    <div class="p-6 md:p-7 flex flex-col gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg shrink-0">2</div>
+                            <h3 class="font-semibold text-xl text-catalina">Pembinaan</h3>
+                        </div>
+                        <div class="inline-flex items-center self-start gap-1.5 px-3 py-1 rounded-full bg-may-green/10 text-may-green text-xs font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            1 tahun intensif (Agu–Apr)
+                        </div>
+                        <p class="text-sm font-medium text-may-green">Pembelajaran Intensif</p>
+                        <p class="text-text-muted leading-relaxed">
+                            Kurikulum khusus, mentoring, dan asrama intensif untuk mempersiapkan siswa menghadapi UTBK dan seleksi PTN.
+                        </p>
+                    </div>
+                    <!-- PROGRAM_IMAGES_2: replace with real pembinaan photos -->
+                    <div class="marquee relative overflow-hidden pb-6 md:pb-7 mt-2">
+                        <div class="marquee-track">
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-1/1600/1200" data-alt="Kelas pembinaan Sakola Kembara"><img src="https://picsum.photos/seed/sk-mid-1/400/400" alt="Kelas pembinaan Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-2/1600/1200" data-alt="Mentoring Sakola Kembara"><img src="https://picsum.photos/seed/sk-mid-2/400/400" alt="Mentoring Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-3/1600/1200" data-alt="Asrama intensif Sakola Kembara"><img src="https://picsum.photos/seed/sk-mid-3/400/400" alt="Asrama intensif Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-4/1600/1200" data-alt="Kegiatan belajar Sakola Kembara"><img src="https://picsum.photos/seed/sk-mid-4/400/400" alt="Kegiatan belajar Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <!-- duplicate set -->
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-1/1600/1200" data-alt="Kelas pembinaan Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-mid-1/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-2/1600/1200" data-alt="Mentoring Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-mid-2/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-3/1600/1200" data-alt="Asrama intensif Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-mid-3/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-mid-4/1600/1200" data-alt="Kegiatan belajar Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-mid-4/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                        </div>
+                    </div>
                 </article>
-                <!-- Card 3 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
-                    <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">3</div>
-                    <h3 class="font-semibold text-xl text-catalina mb-2">Pasca-pembinaan</h3>
-                    <p class="text-sm font-medium text-may-green mb-3">Alumni & Beasiswa</p>
-                    <p class="text-text-muted leading-relaxed">
-                        Pendampingan lanjutan untuk alumni — dukungan beasiswa, pengembangan diri, dan kesempatan berkontribusi kembali.
-                    </p>
+                <!-- Card 3: Pasca-pembinaan -->
+                <article class="bg-white rounded-xl shadow-card border border-gray-100 hover:shadow-card-lg transition-shadow overflow-clip flex flex-col min-w-0">
+                    <div class="p-6 md:p-7 flex flex-col gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg shrink-0">3</div>
+                            <h3 class="font-semibold text-xl text-catalina">Pasca-pembinaan</h3>
+                        </div>
+                        <div class="inline-flex items-center self-start gap-1.5 px-3 py-1 rounded-full bg-may-green/10 text-may-green text-xs font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            50% alumni kembali membantu
+                        </div>
+                        <p class="text-sm font-medium text-may-green">Alumni & Beasiswa</p>
+                        <p class="text-text-muted leading-relaxed">
+                            Pendampingan berkelanjutan: pencarian beasiswa, peningkatan kapasitas, dan peluang untuk berkontribusi kembali.
+                        </p>
+                    </div>
+                    <!-- PROGRAM_IMAGES_3: replace with real alumni photos -->
+                    <div class="marquee relative overflow-hidden pb-6 md:pb-7 mt-2">
+                        <div class="marquee-track">
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-1/1600/1200" data-alt="Alumni Sakola Kembara"><img src="https://picsum.photos/seed/sk-post-1/400/400" alt="Alumni Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-2/1600/1200" data-alt="Wisuda alumni Sakola Kembara"><img src="https://picsum.photos/seed/sk-post-2/400/400" alt="Wisuda alumni Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-3/1600/1200" data-alt="Volunteer alumni Sakola Kembara"><img src="https://picsum.photos/seed/sk-post-3/400/400" alt="Volunteer alumni Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-4/1600/1200" data-alt="Beasiswa alumni Sakola Kembara"><img src="https://picsum.photos/seed/sk-post-4/400/400" alt="Beasiswa alumni Sakola Kembara" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <!-- duplicate set -->
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-1/1600/1200" data-alt="Alumni Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-post-1/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-2/1600/1200" data-alt="Wisuda alumni Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-post-2/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-3/1600/1200" data-alt="Volunteer alumni Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-post-3/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                            <button type="button" class="lightbox-trigger shrink-0 block rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-catalina" data-src="https://picsum.photos/seed/sk-post-4/1600/1200" data-alt="Beasiswa alumni Sakola Kembara" aria-hidden="true" tabindex="-1"><img src="https://picsum.photos/seed/sk-post-4/400/400" alt="" loading="lazy" class="w-28 h-28 object-cover" /></button>
+                        </div>
+                    </div>
                 </article>
             </div>
         </div>
@@ -484,7 +575,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                     </div>
-                    <p class="text-sm">© 2026 Yayasan Sakola Kembara Indonesia. All rights reserved.</p>
+                    <p class="text-sm">© 2026 Yayasan Sakola Kembara Indonesia.<br> All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -497,6 +588,14 @@
 
     <!-- Copy toast -->
     <div id="toast" class="toast" role="status" aria-live="polite">Nomor rekening disalin</div>
+
+    <!-- Lightbox: full-screen photo preview -->
+    <div id="lightbox" class="lightbox fixed inset-0 z-50 bg-black/90 items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Pratinjau foto">
+        <button id="lightbox-close" type="button" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition" aria-label="Tutup pratinjau">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] rounded-lg shadow-card-lg" />
+    </div>
 
     <script>
         // Sticky nav: toggle white bg after user scrolls past the top
@@ -526,6 +625,39 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
+        })();
+
+        // Lightbox: open when any .lightbox-trigger is clicked; close on X, backdrop, ESC
+        (function () {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('lightbox-close');
+            let lastFocus = null;
+
+            const open = (src, alt) => {
+                lastFocus = document.activeElement;
+                img.src = src;
+                img.alt = alt || '';
+                lightbox.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                closeBtn.focus();
+            };
+
+            const close = () => {
+                lightbox.classList.remove('is-open');
+                document.body.style.overflow = '';
+                img.src = '';
+                if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+            };
+
+            document.querySelectorAll('.lightbox-trigger').forEach(btn => {
+                btn.addEventListener('click', () => open(btn.dataset.src, btn.dataset.alt));
+            });
+            closeBtn.addEventListener('click', close);
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+            });
         })();
 
         function copyAccountNumber() {
