@@ -59,11 +59,8 @@
     <style>
         html { scroll-behavior: smooth; }
         /* Body typography per SK Brand Guide: 155% line-height, 0.3% letter-spacing */
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; line-height: 1.55; letter-spacing: 0.003em; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; line-height: 1.55; letter-spacing: 0.003em; font-size: 14px; }
         .font-serif { font-family: 'Lora', Georgia, serif; }
-
-        /* All <p> elements are 14px flat — uniform body text size */
-        p { font-size: 14px !important; }
 
         /* Headline typography per SK Brand Guide: 114% line-height, -1% letter-spacing
            H1 uses 160% for airy hero display. */
@@ -167,7 +164,7 @@
                 <a href="#" aria-label="Sakola Kembara — ke atas" class="flex items-center">
                     <img src="assets/logo-sakola-kembara.png" alt="Sakola Kembara" class="h-9 md:h-10 w-auto" width="300" height="103" />
                 </a>
-                <a href="#donasi" class="btn bg-catalina text-white hover:bg-space-cadet text-sm">Donasi Sekarang</a>
+                <a href="#donasi" class="btn bg-catalina text-white hover:bg-space-cadet">Donasi Sekarang</a>
             </nav>
         </div>
     </header>
@@ -180,11 +177,11 @@
         <section>
             <div class="max-w-container mx-auto px-6 md:px-8 pt-6 pb-16 md:pt-8 md:pb-24">
 
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 lg:gap-24 items-center">
+            <div class="grid md:grid-cols-[4fr_5fr] gap-10 md:gap-12 lg:gap-16 items-center">
 
                 <!-- Left: copy -->
                 <div>
-                    <h1 class="font-serif text-4xl lg:text-5xl font-medium text-catalina mb-5">
+                    <h1 class="font-serif text-[40px] leading-[48px] lg:text-[48px] lg:leading-[56px] font-medium text-catalina mb-5">
                         Membuka Pintu Pendidikan Tinggi untuk Setiap Anak Indonesia
                     </h1>
                     <p class="text-sm text-text-muted mb-4 leading-relaxed">
@@ -281,7 +278,7 @@
 
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Card 1 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-7 border border-gray-100 hover:shadow-card-lg transition-shadow">
+                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
                     <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">1</div>
                     <h3 class="font-semibold text-xl text-catalina mb-2">Prapembinaan</h3>
                     <p class="text-sm font-medium text-may-green mb-3">Seleksi & Roadshow</p>
@@ -290,7 +287,7 @@
                     </p>
                 </article>
                 <!-- Card 2 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-7 border border-gray-100 hover:shadow-card-lg transition-shadow">
+                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
                     <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">2</div>
                     <h3 class="font-semibold text-xl text-catalina mb-2">Pembinaan</h3>
                     <p class="text-sm font-medium text-may-green mb-3">Pembelajaran Intensif</p>
@@ -299,7 +296,7 @@
                     </p>
                 </article>
                 <!-- Card 3 -->
-                <article class="bg-white rounded-xl shadow-card p-6 md:p-7 border border-gray-100 hover:shadow-card-lg transition-shadow">
+                <article class="bg-white rounded-xl shadow-card p-6 md:p-8 border border-gray-100 hover:shadow-card-lg transition-shadow">
                     <div class="w-12 h-12 rounded-lg bg-catalina text-sunglow flex items-center justify-center font-serif font-bold text-lg mb-5">3</div>
                     <h3 class="font-semibold text-xl text-catalina mb-2">Pasca-pembinaan</h3>
                     <p class="text-sm font-medium text-may-green mb-3">Alumni & Beasiswa</p>
@@ -341,12 +338,23 @@
                             class="w-full h-auto block" />
                     </div>
 
-                    <p class="text-sm text-text-muted text-center leading-relaxed">
+                    <p class="text-sm text-text-muted text-center leading-relaxed mb-5">
                         Scan via <strong class="text-text-dark">GoPay, OVO, DANA, ShopeePay</strong>, atau m-banking favoritmu.
                     </p>
-                    <p class="text-xs text-text-muted text-center mt-2">
-                        NMID: <span class="font-mono">ID1025423930698</span>
-                    </p>
+
+                    <div class="flex justify-center">
+                        <a
+                            href="assets/qris-sakola-kembara.jpg"
+                            download="qris-sakola-kembara.jpg"
+                            class="btn btn-outline text-sm !px-3 !py-2 !min-h-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Download QR
+                        </a>
+                    </div>
                 </article>
 
                 <!-- Card B: Transfer Bank -->
@@ -356,13 +364,18 @@
                     <div class="space-y-4">
                         <div>
                             <p class="text-xs uppercase tracking-wide text-text-muted mb-1">Bank</p>
-                            <p class="font-semibold text-text-dark text-lg" id="bank-name">Bank Muamalat</p>
+                            <p class="font-semibold text-text-dark text-base" id="bank-name">Bank Muamalat</p>
+                        </div>
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-text-muted mb-1">Kode Bank</p>
+                            <p class="font-mono font-semibold text-text-dark text-base">147</p>
                         </div>
 
                         <div>
                             <p class="text-xs uppercase tracking-wide text-text-muted mb-1">Nomor Rekening</p>
                             <div class="flex items-center gap-2">
-                                <p class="font-mono font-semibold text-text-dark text-lg tracking-wider flex-1" id="account-number">1010 141 940</p>
+                                <p class="font-mono font-semibold text-text-dark text-base tracking-wider flex-1" id="account-number">1010 141 940</p>
                                 <button
                                     type="button"
                                     class="btn btn-outline text-sm !px-3 !py-2 !min-h-0"
@@ -376,14 +389,14 @@
 
                         <div>
                             <p class="text-xs uppercase tracking-wide text-text-muted mb-1">Atas Nama</p>
-                            <p class="font-semibold text-text-dark">Sakola Kembara Indonesia</p>
+                            <p class="font-semibold text-text-dark text-base">Sakola Kembara Indonesia</p>
                         </div>
                     </div>
                 </article>
             </div>
 
             <!-- Confirmation block -->
-            <div class="max-w-4xl mx-auto mt-10 bg-catalina text-white rounded-2xl p-6 md:p-10 shadow-card-lg relative overflow-hidden border-t-4 border-sunglow">
+            <div class="max-w-4xl mx-auto mt-10 bg-catalina text-white rounded-2xl p-6 md:p-10 shadow-card-lg relative overflow-clip border-t-4 border-sunglow">
                 <!-- Decorative brand shapes -->
                 <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-sunglow/10 pointer-events-none" aria-hidden="true"></div>
                 <div class="absolute -bottom-20 -left-20 w-52 h-52 rounded-full bg-may-green/10 pointer-events-none" aria-hidden="true"></div>
@@ -401,21 +414,21 @@
                     <!-- 3 steps -->
                     <ol class="grid md:grid-cols-3 gap-5 md:gap-6 mb-8 max-w-3xl mx-auto">
                         <li class="flex items-start gap-3">
-                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-sunglow text-catalina font-bold flex items-center justify-center">1</span>
+                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-white text-catalina font-bold flex items-center justify-center">1</span>
                             <div>
                                 <p class="font-semibold text-white mb-1">Transfer</p>
                                 <p class="text-white/70 text-sm leading-relaxed">Kirim donasi via QRIS atau rekening di atas.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-sunglow text-catalina font-bold flex items-center justify-center">2</span>
+                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-white text-catalina font-bold flex items-center justify-center">2</span>
                             <div>
                                 <p class="font-semibold text-white mb-1">Screenshot</p>
                                 <p class="text-white/70 text-sm leading-relaxed">Simpan bukti transfer dari aplikasi Anda.</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
-                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-sunglow text-catalina font-bold flex items-center justify-center">3</span>
+                            <span class="flex-shrink-0 w-9 h-9 rounded-full bg-white text-catalina font-bold flex items-center justify-center">3</span>
                             <div>
                                 <p class="font-semibold text-white mb-1">Konfirmasi</p>
                                 <p class="text-white/70 text-sm leading-relaxed">Kirim bukti & nominal via WhatsApp.</p>
